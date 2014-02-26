@@ -77,7 +77,7 @@ module ActiveMerchant #:nodoc:
           post[:cpf] = options[:cpf]
           post[:browserIp] = options[:ip]
         else
-          "FEDEU"
+          raise CustomerError, customer.message
         end
       end
 
@@ -197,6 +197,9 @@ module ActiveMerchant #:nodoc:
         )
 
         parameters.collect { |key, value| "#{key}=#{CGI.escape(value.to_s)}" }.join("&")
+      end
+
+      class CustomerError < ::Exception
       end
     end
   end
