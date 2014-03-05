@@ -85,7 +85,7 @@ module ActiveMerchant #:nodoc:
         address = options[:billing_address] || options[:address]
         post[:street]         = address[:address1] unless address[:address1].nil?
         post[:complement]     = address[:address2] unless address[:address2].nil?
-        post[:addressZipCode] = address[:zip].to_i
+        post[:addressZipCode] = address[:zip]
         post[:addressNumber]  = address[:number]
       end
 
@@ -199,7 +199,7 @@ module ActiveMerchant #:nodoc:
         parameters.collect { |key, value| "#{key}=#{CGI.escape(value.to_s)}" }.join("&")
       end
 
-      class CustomerError < ::Exception
+      class CustomerError < Exception
       end
     end
   end
